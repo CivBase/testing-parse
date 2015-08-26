@@ -1,0 +1,67 @@
+<!doctype html>
+<head>
+  <!-- Meta Data -->
+  <meta charset="utf-8">
+  <meta name="description" content="Messing around with Parse">
+  <meta name="viewport" content="width=device-width">
+
+  <title>Testing Parse</title>
+
+  <!-- Vendor CSS -->
+  <link rel="stylesheet" href="css/bootstrap-3.3.5.min.css">
+  <link rel="stylesheet" href="css/bootstrap-theme-3.3.5.min.css">
+
+  <!-- Vendor JS -->
+  <script type="text/javascript" src="js/vend/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="js/vend/bootstrap-3.3.5.min.js"></script>
+  <script type="text/javascript" src="js/vend/parse-1.5.0.min.js"></script>
+
+  <!-- JS -->
+  <script type="text/javascript" src="js/gen/parseInit.js"></script>
+  <script type="text/javascript" src="js/gen/testObject.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Messing around with parse data models</h1>
+
+    <!-- Data Creation Form -->
+    <div class="well">
+      <form class="form-inline">
+        <div class="form-group">
+          <label class="sr-only" for="foo-input">foo</label>
+          <input type="text" class="form-control" id="foo-input" placeholder="foo">
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="bar-select">bar</label>
+          <select class="form-control" id="bar-select">
+            <option>North</option>
+            <option>South</option>
+            <option>East</option>
+            <option>West</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary pull-right">Create</button>
+      </form>
+    </div>
+
+    <!-- Data Table -->
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>createdAt</th>
+          <th>updatedAt</th>
+          <th>foo</th>
+          <th>bar</th>
+          <th width="0"><!-- Actions --></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Data -->
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>
