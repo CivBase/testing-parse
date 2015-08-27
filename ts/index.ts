@@ -11,8 +11,6 @@ var TEST_OBJECT_TABLE = (function ($: any, Parse: any, TestObject: any, window: 
 
     api.addTestObject = function (testObject: any): void {
         api.data.push(testObject);
-
-        var body = $('#test-object-data');
         var row = $(
             '<tr id="test-object-' + testObject.id + '">' +
             '<td class="id"></td>' +
@@ -31,7 +29,7 @@ var TEST_OBJECT_TABLE = (function ($: any, Parse: any, TestObject: any, window: 
         row.find('.updatedAt').text(testObject.updatedAt.toLocaleString());
         row.find('.foo').text(testObject.foo);
         row.find('.bar').text(testObject.bar);
-        body.append(row);
+        $('#test-object-data').append(row);
     };
 
     api.create = function (): void {
@@ -89,12 +87,16 @@ var TEST_OBJECT_TABLE = (function ($: any, Parse: any, TestObject: any, window: 
     };
 
     api.spawnAlert = function (type: string, message: string): void {
-        $('#alerts').append(
+        var alertDiv = $(
             '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' +
             '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
             '<span aria-hidden="true">&times;</span>' +
-            '</button>' + message +
+            '</button>' +
+            '<span class="alert-text"></span>' +
             '</div>');
+
+        alertDiv.find('.alert-text').text(message);
+        $('#alerts').append(alertDiv);
 
         window.setTimeout(function (): void {
             var alert = $('#alerts').find('.alert:not(".fading")').first();
