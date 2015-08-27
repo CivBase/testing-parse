@@ -66,5 +66,5 @@ module.exports = function (grunt) {
  
   grunt.registerTask('build', ['typescript']);
   grunt.registerTask('lint', ['jslint', 'tslint']);
-  grunt.registerTask('default', ['lint', 'build']);
+  grunt.registerTask('default', ['tslint', 'build', 'jslint']);
 };
