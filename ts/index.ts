@@ -27,8 +27,8 @@ var TEST_OBJECT_TABLE = (function ($: any, Parse: any, TestObject: any, window: 
         row.find('.id').text(testObject.id);
         row.find('.createdAt').text(testObject.createdAt.toLocaleString());
         row.find('.updatedAt').text(testObject.updatedAt.toLocaleString());
-        row.find('.foo').text(testObject.foo);
-        row.find('.bar').text(testObject.bar);
+        row.find('.foo').text(testObject.attributes.foo);
+        row.find('.bar').text(testObject.attributes.bar);
         $('#test-object-data').append(row);
     };
 
