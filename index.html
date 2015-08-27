@@ -11,23 +11,42 @@
   <link rel="stylesheet" href="css/bootstrap-3.3.5.min.css">
   <link rel="stylesheet" href="css/bootstrap-theme-3.3.5.min.css">
 
+  <!-- Inline CSS -->
+  <style>
+    body {
+      margin: 10px;
+    }
+    .first {
+      height: 200px;
+    }
+    .ontop {
+      height: 100px;
+      position: absolute;
+      top: 10px;
+      right: 0;
+      left: 0;
+    }
+  </style>
+
   <!-- Vendor JS -->
-  <script type="text/javascript" src="js/vend/jquery-1.7.2.min.js"></script>
+  <script type="text/javascript" src="js/vend/jquery-2.1.4.min.js"></script>
   <script type="text/javascript" src="js/vend/bootstrap-3.3.5.min.js"></script>
   <script type="text/javascript" src="js/vend/parse-1.5.0.min.js"></script>
 
   <!-- JS -->
   <script type="text/javascript" src="js/gen/parseInit.js"></script>
   <script type="text/javascript" src="js/gen/testObject.js"></script>
+  <script type="text/javascript" src="js/gen/index.js"></script>
 </head>
 
 <body>
-  <div class="container">
+  <div class="container first">
     <h1>Messing around with parse data models</h1>
+    <hr />
 
     <!-- Data Creation Form -->
     <div class="well">
-      <form class="form-inline">
+      <div class="container-fluid">
         <div class="form-group">
           <label class="sr-only" for="foo-input">foo</label>
           <input type="text" class="form-control" id="foo-input" placeholder="foo">
@@ -41,12 +60,12 @@
             <option>West</option>
           </select>
         </div>
-        <button type="submit" class="btn btn-primary pull-right">Create</button>
-      </form>
+        <button class="btn btn-primary pull-right" onclick="TEST_OBJECT_TABLE.create()">Create</button>
+      </div>
     </div>
 
     <!-- Data Table -->
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
       <thead>
         <tr>
           <th>id</th>
@@ -57,11 +76,12 @@
           <th width="0"><!-- Actions --></th>
         </tr>
       </thead>
-      <tbody>
+      <tbody id="test-object-data">
         <!-- Data -->
       </tbody>
     </table>
   </div>
+  <div id="alerts" class="container ontop"><!-- Alerts --></div>
 </body>
 
 </html>
