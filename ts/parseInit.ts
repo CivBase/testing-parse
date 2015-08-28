@@ -1,6 +1,6 @@
 declare var Parse;
 
-(function (Parse): void {
+(function (Parse: any): void {
     'use strict';
 
     Parse.initialize(

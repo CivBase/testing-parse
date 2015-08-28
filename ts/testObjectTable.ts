@@ -1,8 +1,9 @@
+declare var ALERT;
 declare var jQuery;
 declare var Parse;
 declare var TestObject;
 
-var TEST_OBJECT_TABLE = (function ($: any, Parse: any, TestObject: any, window: any): Object {
+var TEST_OBJECT_TABLE = (function ($: any, ALERT: any, Parse: any, TestObject: any): any {
     'use strict';
 
     var api: any = {
@@ -27,25 +28,25 @@ var TEST_OBJECT_TABLE = (function ($: any, Parse: any, TestObject: any, window: 
         row.find('.id').text(testObject.id);
         row.find('.createdAt').text(testObject.createdAt.toLocaleString());
         row.find('.updatedAt').text(testObject.updatedAt.toLocaleString());
-        row.find('.foo').text(testObject.attributes.foo);
-        row.find('.bar').text(testObject.attributes.bar);
+        row.find('.foo').text(testObject.get('foo'));
+        row.find('.bar').text(testObject.get('bar'));
         $('#test-object-data').append(row);
     };
 
     api.create = function (): void {
-        var foo: string = $('#foo-input').val();
-        var bar: string = $('#bar-select').find('option:selected').text();
+        var foo: string = $('#input-foo').val();
+        var bar: string = $('#select-bar').find('option:selected').text();
         var testObject = new TestObject();
         testObject.save({
             bar: bar,
             foo: foo
         }, {
             error: function (testObject: any, error: any): void {
-                api.spawnAlert('danger', error.message);
+                ALERT.spawnError(error);
             },
             success: function (testObject: any): void {
                 api.addTestObject(testObject);
-                api.spawnAlert('info', 'Successfully created a new TestObject with ID: ' + testObject.id);
+                ALERT.spawn('info', 'Successfully created a new TestObject with ID: ' + testObject.id);
             }
         });
     };
@@ -54,7 +55,7 @@ var TEST_OBJECT_TABLE = (function ($: any, Parse: any, TestObject: any, window: 
         var query = new Parse.Query(TestObject);
         query.find({
             error: function (error: any): void {
-                api.spawnAlert('danger', error.message);
+                ALERT.spawnError(error);
             },
             success: function (results: any[]): void {
                 for (var i in results) {
@@ -74,7 +75,7 @@ var TEST_OBJECT_TABLE = (function ($: any, Parse: any, TestObject: any, window: 
             }
             api.data[i].destroy({
                 error: function (testObject: any, error: any): void {
-                    api.spawnAlert('danger', error.message);
+                    ALERT.spawnError(error);
                 },
                 success: function (testObject: any): void {
                     $('#test-object-' + id).remove();
@@ -83,32 +84,10 @@ var TEST_OBJECT_TABLE = (function ($: any, Parse: any, TestObject: any, window: 
             });
             return;
         }
-        api.spawnAlert('danger', 'No TestObject found with ID: ' + id);
-    };
-
-    api.spawnAlert = function (type: string, message: string): void {
-        var alertDiv = $(
-            '<div class="alert alert-' + type + ' alert-dismissible" role="alert">' +
-            '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-            '<span aria-hidden="true">&times;</span>' +
-            '</button>' +
-            '<span class="alert-text"></span>' +
-            '</div>');
-
-        alertDiv.find('.alert-text').text(message);
-        $('#alerts').append(alertDiv);
-
-        window.setTimeout(function (): void {
-            var alert = $('#alerts').find('.alert:not(".fading")').first();
-            alert.addClass('fading');
-            alert.fadeTo(1500, 0);
-            alert.slideUp(500, function (): void {
-                $(this).remove();
-            });
-        }, 5000);
+        ALERT.spawn('danger', 'No TestObject found with ID: ' + id);
     };
 
     $(document).ready(api.initialize);
 
     return api;
-}(jQuery, Parse, TestObject, window));
+}(jQuery, ALERT, Parse, TestObject));

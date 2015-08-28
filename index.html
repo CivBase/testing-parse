@@ -8,25 +8,12 @@
   <title>Testing Parse</title>
 
   <!-- Vendor CSS -->
-  <link rel="stylesheet" href="css/bootstrap-3.3.5.min.css">
-  <link rel="stylesheet" href="css/bootstrap-theme-3.3.5.min.css">
+  <link rel="stylesheet" href="css/vend/bootstrap-3.3.5.min.css">
+  <link rel="stylesheet" href="css/vend/bootstrap-theme-3.3.5.min.css">
 
-  <!-- Inline CSS -->
-  <style>
-    body {
-      margin: 10px;
-    }
-    .first {
-      height: 200px;
-    }
-    .ontop {
-      height: 100px;
-      position: absolute;
-      top: 10px;
-      right: 0;
-      left: 0;
-    }
-  </style>
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/alert.css">
+  <link rel="stylesheet" href="css/navbar.css">
 
   <!-- Vendor JS -->
   <script type="text/javascript" src="js/vend/jquery-2.1.4.min.js"></script>
@@ -35,11 +22,34 @@
 
   <!-- JS -->
   <script type="text/javascript" src="js/gen/parseInit.js"></script>
+  <script type="text/javascript" src="js/gen/authenticate.js"></script>
+  <script type="text/javascript" src="js/gen/alert.js"></script>
   <script type="text/javascript" src="js/gen/testObject.js"></script>
-  <script type="text/javascript" src="js/gen/index.js"></script>
+  <script type="text/javascript" src="js/gen/testObjectTable.js"></script>
 </head>
 
 <body>
+  <!-- Nav Bar -->
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Testing Parse</a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="logout.html">Log out <span class="glyphicon glyphicon-log-out"></span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Content -->
   <div class="container first">
     <h1>Messing around with parse data models</h1>
     <hr />
@@ -48,12 +58,12 @@
     <div class="well">
       <div class="container-fluid">
         <div class="form-group">
-          <label class="sr-only" for="foo-input">foo</label>
-          <input type="text" class="form-control" id="foo-input" placeholder="foo">
+          <label class="sr-only" for="input-foo">foo</label>
+          <input type="text" class="form-control" id="input-foo" placeholder="foo">
         </div>
         <div class="form-group">
-          <label class="sr-only" for="bar-select">bar</label>
-          <select class="form-control" id="bar-select">
+          <label class="sr-only" for="select-bar">bar</label>
+          <select class="form-control" id="select-bar">
             <option>North</option>
             <option>South</option>
             <option>East</option>
@@ -76,12 +86,12 @@
           <th width="0"><!-- Actions --></th>
         </tr>
       </thead>
-      <tbody id="test-object-data">
-        <!-- Data -->
-      </tbody>
+      <tbody id="test-object-data"><!-- Data --></tbody>
     </table>
   </div>
-  <div id="alerts" class="container ontop"><!-- Alerts --></div>
+
+  <!-- Alerts -->
+  <div id="alerts" class="container ontop"></div>
 </body>
 
 </html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<head>
+  <!-- Meta Data -->
+  <meta charset="utf-8">
+  <meta name="description" content="Messing around with Parse">
+  <meta name="viewport" content="width=device-width">
+
+  <title>Sign In</title>
+
+  <!-- Vendor CSS -->
+  <link rel="stylesheet" href="css/vend/bootstrap-3.3.5.min.css">
+  <link rel="stylesheet" href="css/vend/bootstrap-theme-3.3.5.min.css">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/alert.css">
+  <link rel="stylesheet" href="css/auth.css">
+
+  <!-- Vendor JS -->
+  <script type="text/javascript" src="js/vend/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="js/vend/bootstrap-3.3.5.min.js"></script>
+  <script type="text/javascript" src="js/vend/parse-1.5.0.min.js"></script>
+
+  <!-- JS -->
+  <script type="text/javascript" src="js/gen/parseInit.js"></script>
+  <script type="text/javascript" src="js/gen/alert.js"></script>
+  <script type="text/javascript" src="js/gen/loginForm.js"></script>
+</head>
+
+<body>
+  <!-- Content -->
+  <div class="container first">
+
+    <!-- Login Form -->
+    <div class="form-auth">
+      <div class="container-fluid">
+        <h3 class="auth-header">Auth yourself before your off yourself</h3>
+        <div class="form-group">
+          <label class="sr-only" for="input-username">username</label>
+          <input type="text" class="form-control" id="input-username" placeholder="username">
+        </div>
+        <div class="form-group">
+          <label class="sr-only" for="input-password">password</label>
+          <input type="password" class="form-control" id="input-password" placeholder="password">
+        </div>
+        <button class="btn brn-lg btn-primary btn-block" onclick="LOGIN_FORM.login()">sign in</button>
+        <a class="btn brn-lg btn-default btn-block" href="register.html">register</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alerts -->
+  <div id="alerts" class="container ontop"></div>
+</body>
+
+</html>
