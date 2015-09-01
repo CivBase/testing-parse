@@ -2,10 +2,7 @@ language:
   node_js
 
 node_js:
-  0.10
-
-install:
-  npm install
+  stable
 
 script:
   node_modules/grunt-cli/bin/grunt
