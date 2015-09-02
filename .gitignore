@@ -1,3 +1,5 @@
+node_modules/
+
 ### Windows ###
 # Windows image file caches
 Thumbs.db
@@ -289,7 +291,7 @@ dist/
 # Logs
 logs
 *.log
-npm-debug.log*
+npm-debug.log
 
 # Runtime data
 pids

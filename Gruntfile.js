@@ -10,12 +10,12 @@ module.exports = function (grunt) {
         jslint: {
             base: {
                 src: [
-                    'js/**/*.js'
+                    'testing-parse/js/**/*.js'
                 ],
                 exclude: [
-                    'js/**/*.min.js',
-                    'js/gen/**/*.js',
-                    'js/vend/**/*.js'
+                    'testing-parse/js/**/*.min.js',
+                    'testing-parse/js/gen/**/*.js',
+                    'testing-parse/js/vend/**/*.js'
                 ],
                 directives: {
                     browser: true,
@@ -27,37 +27,37 @@ module.exports = function (grunt) {
                 },
                 options: {
                     edition: 'latest',
-                    junit: 'out/junit.xml',
-                    log: 'out/lint.log',
-                    jslintXml: 'out/jslint.xml',
+                    junit: 'testing-parse/out/junit.xml',
+                    log: 'testing-parse/out/lint.log',
+                    jslintXml: 'testing-parse/out/jslint.xml',
                     errorsOnly: true,
                     failOnError: true,
-                    checkstyle: 'out/server-checkstyle.xml'
+                    checkstyle: 'testing-parse/out/server-checkstyle.xml'
                 }
             }
         },
         tslint: {
             options: {
-                configuration: grunt.file.readJSON("tslint.json")
+                configuration: grunt.file.readJSON('tslint.json')
             },
             base: {
                 src: [
-                    'ts/**/*.ts'
+                    'testing-parse/ts/**/*.ts'
                 ]
             }
         },
         typescript: {
             base: {
                 src: [
-                    'ts/**/*.ts'
+                    'testing-parse/ts/**/*.ts'
                 ],
-                dest: 'js/gen'
+                dest: 'testing-parse/js/gen'
             }
         },
         watch: {
             scripts: {
                 files: [
-                    'ts/**/*.ts'
+                    'testing-parse/ts/**/*.ts'
                 ],
                 tasks: [
                     'typescript'
