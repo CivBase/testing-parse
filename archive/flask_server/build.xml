@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<project name="test-server" basedir=".">
+    <property name="basedir.absolute" location="${basedir}" />
+
+    <target name="check-os">
+        <condition property="isPosix">
+            <or>
+                <os family="mac" />
+                <os family="unix" />
+            </or>
+        </condition>
+        <condition property="isWindows">
+            <os family="windows" />
+        </condition>
+    </target>
+
+    <target name="configure-posix" depends="check-os" if="isPosix">
+        <copy file="${basedir.absolute}/build-user.properties.posix" tofile="${basedir}/build-user.properties" overwrite="false" />
+        <property file="${basedir.absolute}/build-user.properties" />
+        <property name="pip.executable" location="${virtualenv.dir}/bin/pip" />
+        <property name="python.executable" location="${virtualenv.dir}/bin/python" />
+        <property name="nose.executable" location="${virtualenv.dir}/bin/nosetests" />
+    </target>
+
+    <target name="configure-windows" depends="check-os" if="isWindows">
+        <copy file="${basedir.absolute}/build-user.properties.windows" tofile="${basedir}/build-user.properties" overwrite="false" />
+        <property file="${basedir.absolute}/build-user.properties" />
+        <property name="pip.executable" location="${virtualenv.dir}/Scripts/pip.exe" />
+        <property name="python.executable" location="${virtualenv.dir}/Scripts/python.exe" />
+        <property name="nose.executable" location="${virtualenv.dir}/Scripts/nosetests.exe" />
+    </target>
+
+    <target name="configure-properties" depends="configure-posix, configure-windows" />
+
+    <target name="pip-install" depends="configure-properties">
+        <exec dir="${basedir.absolute}" executable="${pip.executable}" failonerror="true">
+            <arg line='install -r requirements_dev.txt' />
+        </exec>
+    </target>
+
+    <target name="npm-install" depends="configure-properties">
+        <exec dir="${basedir.absolute}/grunt" executable="${npm.executable}" failonerror="true">
+            <arg line="install" />
+        </exec>
+    </target>
+
+    <target name="configure" depends="pip-install, npm-install" />
+
+    <target name="compile-js" depends="configure-properties">
+        <exec dir="${basedir.absolute}/grunt" executable="${grunt.executable}" failonerror="true">
+            <arg value="react" />
+            <arg value="concat" />
+            <arg value="uglify" />
+        </exec>
+    </target>
+
+    <target name="run" depends="compile-js" >
+        <exec dir="${basedir.absolute}" executable="${python.executable}" failonerror="true">
+            <arg value="run.py" />
+        </exec>
+    </target>
+
+    <target name="reset-db" depends="configure-properties">
+        <exec dir="${basedir.absolute}" executable="${python.executable}" failonerror="true">
+            <arg value="configure_database.py" />
+        </exec>
+    </target>
+
+    <target name="test" depends="configure-properties" >
+        <exec dir="${basedir.absolute}" executable="${nose.executable}" failonerror="true" />
+    </target>
+</project>

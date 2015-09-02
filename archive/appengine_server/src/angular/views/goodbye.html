@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}See Ya!{% endblock %}
+
+{% block content %}
+
+<div ng-controller="GoodbyeController">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Bootstrap <3</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/">Hello</a></li>
+                    <li class="active"><a href="#">Goodbye</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <div id="bootstrap-tester" class="jumbotron">
+        <div class="container">
+            <h1>Bootstrap starter template:</h1>
+            <p class="lead">{$ arg1 $} Bacon ipsum dolor sit amet tenderloin chuck jowl, drumstick pork loin kevin andouille tri-tip. Turkey biltong sirloin, tongue rump pork belly t-bone tail sausage venison corned beef. Jerky pig shoulder beef, tri-tip turducken kevin ribeye prosciutto spare ribs.</p>
+            <a class="btn btn-primary btn-lg btn-block" ng-click="update()">Arbitrary button of abscure importance</a>
+        </div>
+    </div>
+
+    <div id="angular-tester">
+        <div>
+            Value: <input type="text" ng-model="strVal" /><br/>
+            <a class="btn btn-primary" ng-click="submit(strVal)" moreinfo="Submit a new string model">Submit</a>
+        </div>
+        <div>
+            <a class="btn" ng-click="refresh()" moreinfo="Refresh models list">
+                <ng-switch on="refreshing">
+                    <i ng-switch-when="true" class="icon-spinner icon-spin"></i>
+                    <i ng-switch-when="false" class="icon-repeat"></i>
+                </ng-switch> Refresh
+            </a>
+            <dl class="dl-horizontal">
+                <div data-ng-repeat="m in models">
+                    <dt>{{ m.key }}</dt>
+                    <dd>{{ m.val }}</dd>
+                </div>
+            </dl>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

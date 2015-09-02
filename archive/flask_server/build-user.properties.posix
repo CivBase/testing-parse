@@ -1,0 +1,3 @@
+grunt.executable=${basedir}/grunt/node_modules/.bin/grunt
+npm.executable=npm
+virtualenv.dir=/absolute/path/to/virtualenv

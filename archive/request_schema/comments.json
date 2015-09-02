@@ -1,0 +1,83 @@
+{
+	"user": "username",
+	"exportTo": ["pollard", "world wide butterfly wrestling organization"],
+	"survey": {
+		"type": "meandering",
+		"name": "survey name",
+		"start": "2015-03-02T12:00:00", // Datetime?
+		"end": "2015-03-02T17:30:00", // Datetime?
+		"locationName": "some location",
+		"surveyorCount": 3,
+		"surveyorName": "some name",
+		"comment": "test comment",
+		"habitatType": "habitual", // Might be an enum
+		"habitatCondition": "pretty good", // Maybe an enum as well
+		"surveyWeather": {
+			"windSpeed": "calm",
+			"radius": 5, // Unit?
+			"cloudCoverage": "mostly_clear",
+			"engagement": 7, // Unit? And what is this?
+			"temperature": 15, // Unit?
+			"upload": "herp", // Unknown
+			"transDiv": "derp", // Unknown
+			"oHumidity": 10,
+			"oRain": 9, // MASON!? WHAT DO THE NUMBERS MEAN!?
+			"oPressure": 8, // Really, though. There are no units.
+			"time": "08:07:06",
+			"oSnow": 7,
+			"oWindDir": 6,
+			"oWindSpeed": 5,
+			"oCity": "townsville",
+			"oCountry": "lichtenstein",
+			"oCloudCover": 4, // Repeated information?
+			"oMaxTemp": 3,
+			"oMinTemp": 2,
+			"oSunrise": "08:30:00",
+			"oSunset": "21:00:00" // I'm so confused
+		},
+		"sightings": [
+			{
+				"speciesCommon": "common",
+				"speciesScientific": "science!",
+				"subfamilyCommon": "family",
+				"subfamilyScientific": "family science!",
+				"familyCommon": "more family?",
+				"familyScientific": "I ran out of things to say",
+				"number": 1,
+				"time": "2015-03-02T15:30:00", // Datetime?
+				"behavior": "nectaring",
+				"gender": "male",
+				"condition": "pretty good I guess",
+				"comment": "here's a comment",
+				"transect": "A", // What is this?
+				"wingLength": 3,
+				"markFound": true,
+				"markAdded": false,
+				"latitude": 18.4,
+				"longitude": 37.9,
+				"locationTime": "15:30:00", // Time? What about "time" up there?
+				"locationAccuracy": 3,
+				"point": "unknown", // Unknown
+				"weather": {
+					"temperature": 23,
+					"windSpeed": 5,
+					"windDirection": 6,
+					"cloudCover": 2,
+					"pressure": 5,
+					"ambientTemperature": 9,
+					"illuminance": 0, // luminance?
+					"relativeHumidity": 3
+				}
+			}
+		],
+		"breadcrumbs": [
+			{
+				"time": "2015-03-02T15:30:00", // Datetime?
+				"latitude": 35.3,
+				"longitude": 53.3,
+				"accuracy": 6,
+				"speed": 2
+			}
+		]
+	}
+}

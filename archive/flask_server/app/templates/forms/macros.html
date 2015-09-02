@@ -1,0 +1,22 @@
+{% macro render_field(field, value='', placeholder='', addon='', autofocus=false) %}
+    <div {% if addon %}class="input-group"{% endif %}>
+        {% if field.errors %}
+            {% set field_class = 'has-error form-control' %}
+        {% else %}
+            {% set field_class = 'form-control' %}
+        {% endif %}
+        {{ field.label(class="sr-only") }}
+        {{ field(value=value, class=field_class, placeholder=placeholder, autofocus=autofocus) }}
+        {% if addon %}
+            <span class="input-group-addon">{{ addon }}</span>
+        {% endif %}
+    </div>
+{% endmacro %}
+
+{% macro render_checkbox(field, label='') %}
+    <div class="checkbox">
+        <label>
+            {{ field() }}{{ label }}
+        </label>
+    </div>
+{% endmacro %}

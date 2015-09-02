@@ -1,0 +1,8 @@
+app/static/.webassets-cache/*
+app/static/dist/*
+app/static/gen/*
+app.db
+build-user.properties
+grunt/node_modules/*
+instance/*
+*.compiled.js

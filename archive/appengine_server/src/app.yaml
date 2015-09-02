@@ -1,0 +1,23 @@
+application: disco-biscuit
+version: superalpha
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /vend
+  static_dir: angular/vendor
+
+- url: /style
+  static_dir: angular/styles
+
+- url: /angular
+  static_dir: angular/dist
+
+- url: /.*
+  script: app.application
+  login: required
+
+libraries:
+- name: jinja2
+  version: "2.6"

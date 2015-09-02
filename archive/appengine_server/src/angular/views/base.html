@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{% block title %}{% endblock %}</title>
+
+        <link href="/vend/bootstrap-3.3.1/css/bootstrap.min.css" rel="stylesheet">
+        <link href="/vend/bootstrap-3.3.1/css/bootstrap-theme.min.css" rel="stylesheet">
+        <style>
+            {% block inline_css %}{% endblock %}
+        </style>
+
+        <script src="/vend/angular-1.3.6/angular.js"></script>
+        <script src="/vend/angular-1.3.6/angular-resource.js"></script>
+        <script src="/vend/angular-1.3.6/angular-route.js"></script>
+        <script src="/vend/angular-1.3.6/angular-touch.js"></script>
+        <script src="/angular/disco-biscuit.js"></script>
+    </head>
+    <body>
+        <div ng-app="disco-biscuit">
+            {% block content %}
+                <angular-app ng-view></angular-app>
+            {% endblock %}
+        </div>
+
+        <script type="text/javascript" src="/vend/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="/vend/bootstrap-3.3.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript">
+            {% block inline_js %}{% endblock %}
+        </script>
+    </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+
+        <title>{% block title %}My Site{% endblock %}</title>
+
+        {% assets "bootstrap_css" %}
+            <link rel="stylesheet" href="{{ ASSET_URL }}" />
+        {% endassets %}
+        {% assets "sb_admin_2_css" %}
+            <link rel="stylesheet" href="{{ ASSET_URL }}" />
+        {% endassets %}
+        {% assets "forms_css" %}
+            <link rel="stylesheet" href="{{ ASSET_URL }}" />
+        {% endassets %}
+        {% assets "global_css" %}
+            <link rel="stylesheet" href="{{ ASSET_URL }}" />
+        {% endassets %}
+        {% assets "tables_css" %}
+            <link rel="stylesheet" href="{{ ASSET_URL }}" />
+        {% endassets %}
+        {% block style %}{% endblock %}
+
+        {% assets "react_js" %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
+        {% assets "jquery_js" %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
+        {% assets "bootstrap_js" %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
+        {% assets "sb_admin_2_js" %}
+            <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+        {% endassets %}
+        {% block script %}{% endblock %}
+    </head>
+    <body>
+        <div id="header">
+            {% block header %}{% endblock %}
+        </div>
+        <div id="messages" class="container">
+            {% for category, msg in get_flashed_messages(with_categories=true) %}
+                {% if category == 'error' %}
+                    {% set alert_class = 'alert-danger' %}
+                    {% set alert_type = 'Error: ' %}
+                {% elif category == 'success' %}
+                    {% set alert_class = 'alert-success' %}
+                    {% set alert_type = 'Success: ' %}
+                {% elif category == 'warning' %}
+                    {% set alert_class = 'alert-warning' %}
+                    {% set alert_type = 'Warning: ' %}
+                {% else %}
+                    {% set alert_class = 'alert-info' %}
+                    {% set alert_type = '' %}
+                {% endif %}
+                <div class="alert alert-dismissible {{ alert_class }}" style="margin: 10px;">
+                    <button type="button" class="close" data-dismiss="alert">
+                        &times;
+                    </button>
+                    {% if alert_type %}
+                        <strong>{{ alert_type }}</strong>
+                    {% endif %}
+                    {{ msg }}
+                </div>
+            {% endfor %}
+        </div>
+        <div id="content" style="margin-top: 10px;">
+            {% block content %}{% endblock %}
+        </div>
+        <div id="footer">
+            {% block footer %}{% endblock %}
+        </div>
+    </body>
+</html>

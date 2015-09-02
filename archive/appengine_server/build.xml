@@ -1,0 +1,67 @@
+<?xml version="1.0" ?>
+<project name="disco-biscuit" basedir=".">
+    <property name="basedir.absolute" location="${basedir}" />
+
+    <target name="check-os">
+        <condition property="isPosix">
+            <or>
+                <os family="mac" />
+                <os family="unix" />
+            </or>
+        </condition>
+        <condition property="isWindows">
+            <os family="windows" />
+        </condition>
+    </target>
+
+    <target name="configure-posix" depends="check-os" if="isPosix">
+        <copy file="${basedir.absolute}/build-user.properties.posix" tofile="${basedir}/build-user.properties" overwrite="false" />
+        <property file="${basedir.absolute}/build-user.properties" />
+        <property name="pip.executable" location="${virtualenv.dir}/bin/pip" />
+        <property name="python.executable" location="${virtualenv.dir}/bin/python" />
+    </target>
+
+    <target name="configure-windows" depends="check-os" if="isWindows">
+        <copy file="${basedir.absolute}/build-user.properties.windows" tofile="${basedir}/build-user.properties" overwrite="false" />
+        <property file="${basedir.absolute}/build-user.properties" />
+        <property name="pip.executable" location="${virtualenv.dir}/Scripts/pip.exe" />
+        <property name="python.executable" location="${virtualenv.dir}/Scripts/python.exe" />
+    </target>
+
+    <target name="configure-properties" depends="configure-posix, configure-windows" />
+
+    <target name="pip-install">
+        <exec executable="${pip.executable}" dir="${basedir.absolute}/src" failonerror="true">
+            <arg line='install --install-option="--install-purelib=${basedir.absolute}/src" --no-deps --no-index -Ir requirements_lib.txt' />
+        </exec>
+        <!-- delete .egg-info directories
+        <delete includeemptydirs="true">
+            <fileset dir="${basedir.absolute}/src" includes="*.egg-info"/>
+        </delete>
+        -->
+    </target>
+
+    <target name="install-grunt">
+        <exec dir="${basedir.absolute}/grunt" executable="${npm.executable}" failonerror="true">
+            <arg line="install grunt" />
+        </exec>
+        <exec dir="${basedir.absolute}/grunt" executable="${npm.executable}" failonerror="true">
+            <arg line="install grunt-cli" />
+        </exec>
+        <exec dir="${basedir.absolute}/grunt" executable="${npm.executable}" failonerror="true">
+            <arg line="install grunt-contrib-concat" />
+        </exec>
+        <exec dir="${basedir.absolute}/grunt" executable="${npm.executable}" failonerror="true">
+            <arg line="install grunt-contrib-uglify" />
+        </exec>
+    </target>
+
+    <target name="configure" depends="pip-install, install-grunt" />
+
+    <target name="compile-js">
+        <exec dir="${basedir.absolute}/grunt" executable="${grunt.executable}" failonerror="true">
+            <arg value="concat" />
+            <arg value="uglify" />
+        </exec>
+    </target>
+</project>
