@@ -15,17 +15,8 @@
   <link rel="stylesheet" href="css/alert.css">
   <link rel="stylesheet" href="css/navbar.css">
 
-  <!-- Vendor JS -->
-  <script type="text/javascript" src="js/vend/jquery-2.1.4.min.js"></script>
-  <script type="text/javascript" src="js/vend/bootstrap-3.3.5.min.js"></script>
-  <script type="text/javascript" src="js/vend/parse-1.5.0.min.js"></script>
-
-  <!-- JS -->
-  <script type="text/javascript" src="js/gen/parseInit.js"></script>
-  <script type="text/javascript" src="js/gen/authenticate.js"></script>
-  <script type="text/javascript" src="js/gen/alert.js"></script>
-  <script type="text/javascript" src="js/gen/testObject.js"></script>
-  <script type="text/javascript" src="js/gen/testObjectTable.js"></script>
+  <!-- RequireJS -->
+  <script type="text/javascript" data-main="js/dist/main.js" src="js/vend/require-2.1.20.min.js"></script>
 </head>
 
 <body>
@@ -70,7 +61,7 @@
             <option>West</option>
           </select>
         </div>
-        <button class="btn btn-primary pull-right" onclick="TEST_OBJECT_TABLE.create()">Create</button>
+        <button class="btn btn-primary pull-right" onclick="testObjectTable.create()">Create</button>
       </div>
     </div>
 

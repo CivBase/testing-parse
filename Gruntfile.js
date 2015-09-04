@@ -1,72 +1,89 @@
-module.exports = function (grunt) {
-    'use strict';
+'use strict';
 
-    grunt.loadNpmTasks('grunt-jslint');
-    grunt.loadNpmTasks('grunt-tslint');
-    grunt.loadNpmTasks('grunt-typescript');
+module.exports = function(grunt) {
+    grunt.loadNpmTasks('grunt-babel');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-eslint');
+    grunt.loadNpmTasks('grunt-react');
 
     grunt.initConfig({
-        jslint: {
-            base: {
-                src: [
-                    'testing-parse/js/**/*.js'
-                ],
-                exclude: [
-                    'testing-parse/js/**/*.min.js',
-                    'testing-parse/js/gen/**/*.js',
-                    'testing-parse/js/vend/**/*.js'
-                ],
-                directives: {
-                    browser: true,
-                    predef: [
-                        'jQuery',
-                        '$',
-                        'Parse'
-                    ]
-                },
-                options: {
-                    edition: 'latest',
-                    junit: 'testing-parse/out/junit.xml',
-                    log: 'testing-parse/out/lint.log',
-                    jslintXml: 'testing-parse/out/jslint.xml',
-                    errorsOnly: true,
-                    failOnError: true,
-                    checkstyle: 'testing-parse/out/server-checkstyle.xml'
-                }
+        pkg: grunt.file.readJSON('package.json'),
+        eslint: {
+            target: [
+                'testing-parse/js/**/*.jsx'
+            ]
+        },
+        react: {
+            js: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'testing-parse/js',
+                        src: [
+                            '**/*.jsx'
+                        ],
+                        dest: 'testing-parse/js/gen',
+                        ext: '.js'
+                    }
+                ]
+            },
+            options: {
+                harmony: true,
+                es6module: true
             }
         },
-        tslint: {
+        babel: {
             options: {
-                configuration: grunt.file.readJSON('tslint.json')
+                modules: 'amd'
             },
-            base: {
-                src: [
-                    'testing-parse/ts/**/*.ts'
+            js: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'testing-parse/js/gen',
+                        src: [
+                            '**/*.js'
+                        ],
+                        dest: 'testing-parse/js/dist',
+                        ext: '.js'
+                    }
                 ]
             }
         },
-        typescript: {
-            base: {
-                src: [
-                    'testing-parse/ts/**/*.ts'
-                ],
-                dest: 'testing-parse/js/gen'
+        uglify: {
+            js: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'testing-parse/js/dist',
+                        src: [
+                            '**/*.js'
+                        ],
+                        dest: 'testing-parse/js/dist',
+                        ext: '.min.js'
+                    }
+                ]
+            },
+            options: {
+                compress: true,
+                mangle: true,
+                mangleProperties: true
             }
         },
         watch: {
-            scripts: {
+            js: {
                 files: [
-                    'testing-parse/ts/**/*.ts'
+                    'testing-parse/js/**/*.jsx'
                 ],
                 tasks: [
-                    'typescript'
+                    'build'
                 ]
             }
         }
     });
 
-    grunt.registerTask('build', ['typescript']);
-    grunt.registerTask('lint', ['tslint', 'jslint']);
-    grunt.registerTask('default', ['tslint', 'build', 'jslint']);
+    grunt.registerTask('lint', ['eslint']);
+    grunt.registerTask('build', ['react', 'babel', 'uglify']);
+    grunt.registerTask('default', ['lint', 'build']);
 };
