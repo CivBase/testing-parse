@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Foo{% endblock %}
+{% block script %}
+    {% assets "foo_js" %}
+        <script type="text/jsx" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#collapse-foo-form">
+                            Create new data
+                        </a>
+                    </h4>
+                </div>
+                <div id="collapse-foo-form" class="panel-collapse collapse in">
+                    <div class="panel-body">
+                        {% from "forms/macros.html" import render_field, render_checkbox %}
+                        <form id="form-foo">
+                            {{ form.csrf_token }}
+                            <div class="form-fields">
+                                {{ render_field(form.number, placeholder='Number') }}
+                                {{ render_field(form.text, placeholder='Text') }}
+                                {{ render_checkbox(form.boolean, label='Boolean') }}
+                            </div>
+                            <button type="submit" class="btn btn-lg btn-primary btn-block">Create</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <a href="{{ url_for('users.home') }}" class="btn btn-lg btn-default">Back to profile</a>
+            <button onclick="updateFoos()" id="refresh-foos" class="btn btn-lg btn-default">Refresh table</button>
+        </div>
+        <div class="row" id="foo-table" style="margin-top: 10px;">
+        </div>
+    </div>
+{% endblock %}

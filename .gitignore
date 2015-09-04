@@ -1,7 +1,4 @@
-js/gen/
 node_modules/
-out/
-
 
 ### Windows ###
 # Windows image file caches
@@ -294,7 +291,7 @@ dist/
 # Logs
 logs
 *.log
-npm-debug.log*
+npm-debug.log
 
 # Runtime data
 pids

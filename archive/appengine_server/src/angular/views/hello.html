@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}Hello World!{% endblock %}
+
+{% block content %}
+
+<div ng-controller="HelloController">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Bootstrap <3</a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#">Hello</a></li>
+                    <li><a href="/goodbye">Goodbye</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </div>
+
+    <div id="bootstrap-tester" class="jumbotron">
+        <div class="container">
+            <h1>Bootstrap starter template:</h1>
+            <p class="lead">{$ arg1 $} Bacon ipsum dolor sit amet tenderloin chuck jowl, drumstick pork loin kevin andouille tri-tip. Turkey biltong sirloin, tongue rump pork belly t-bone tail sausage venison corned beef. Jerky pig shoulder beef, tri-tip turducken kevin ribeye prosciutto spare ribs.</p>
+            <a class="btn btn-primary btn-lg btn-block" ng-click="update()">Arbitrary button of abscure importance</a>
+        </div>
+    </div>
+
+    <div id="angular-tester">
+        Write some text in textbox:
+        <input type="text" ng-model="sometext" />
+
+        <h1>Hello {{ sometext }}</h1>
+    </div>
+</div>
+
+{% endblock %}
