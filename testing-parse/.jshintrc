@@ -1,0 +1,22 @@
+{
+  "bitwise": false,
+  "curly": true,
+  "forin": true,
+  "freeze": true,
+  "predef": [
+    "__dirname",
+    "console",
+    "module",
+    "process",
+    "require"
+  ],
+  "latedef": true,
+  "maxcomplexity": 11,
+  "nocomma": true,
+  "nonbsp": true,
+  "nonew": true,
+  "quotmark": "single",
+  "strict": true,
+  "undef": true,
+  "unused": true
+}
