@@ -13,35 +13,14 @@ app.get('/app.js', function(request, response) {
     response.redirect('//localhost:9090/build/app.js');
 });
 
+app.use('/static', express.static('build'));
+
 app.get('*', function(request, response) {
     'use strict';
 
     response.sendFile(__dirname + '/build/index.html');
 });
 
-app.post('/home', function(request, response) {
-    'use strict';
-
-    response.json({
-        title: 'Testing Parse'
-    });
-});
-
-app.post('/login', function(request, response) {
-    'use strict';
-
-    response.json({
-        title: 'Login'
-    });
-});
-
-app.post('/register', function(request, response) {
-    'use strict';
-
-    response.json({
-        title: 'Register'
-    });
-});
 
 // start hot module replacement server
 if (!process.env.UBR_PRODUCTION) {

@@ -1,41 +1,39 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-import {NavBar} from '../common/components';
-import {getData} from '../common/request';
+import NavBar from '../common/components';
 
 class HomePage extends React.Component {
     render() {
-        let {title} = this.props.data.home;
 
         return (
             <div id="home-page">
                 <NavBar></NavBar>
 
-                <div id="main" class="container first">
-                    <h1>{title}</h1>
+                <div id="main" className="container first">
+                    <h1>Butterflies</h1>
                     <hr />
 
-                    <div class="well">
-                        <div class="container-fluid">
-                            <div class="form-group">
-                                <label class="sr-only" for="input-foo">foo</label>
-                                <input type="text" class="form-control" id="input-foo" placeholder="foo" />
+                    <div className="well">
+                        <div className="container-fluid">
+                            <div className="form-group">
+                                <label className="sr-only" for="input-foo">foo</label>
+                                <input type="text" className="form-control" id="input-foo" placeholder="foo" />
                             </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="select-bar">bar</label>
-                                <select class="form-control" id="select-bar">
+                            <div className="form-group">
+                                <label className="sr-only" for="select-bar">bar</label>
+                                <select className="form-control" id="select-bar">
                                     <option>North</option>
                                     <option>South</option>
                                     <option>East</option>
                                     <option>West</option>
                                 </select>
                             </div>
-                            <button class="btn btn-primary pull-right" onclick="">Create</button>
+                            <button className="btn btn-primary pull-right" onclick="">Create</button>
                         </div>
                     </div>
 
-                    <table class="table table-striped table-hover">
+                    <table className="table table-striped table-hover">
                         <thead>
                         <tr>
                             <th>id</th>
@@ -49,15 +47,12 @@ class HomePage extends React.Component {
                         <tbody id="test-object-data"></tbody>
                     </table>
 
-                    <div id="alerts" class="container ontop"></div>
+                    <div id="alerts" className="container ontop"></div>
                 </div>
             </div>
         );
     }
 
-    static fetchData(params) {
-        return getData('/home');
-    }
 }
 
 export default HomePage;

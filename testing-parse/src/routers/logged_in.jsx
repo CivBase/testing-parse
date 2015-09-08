@@ -1,4 +1,4 @@
-import {React} from 'react';
+import React from 'react';
 import {DefaultRoute, Link, Route, RouteHandler} from 'react-router';
 
 import {HomePage} from '../pages/home';
@@ -6,18 +6,8 @@ import {HomePage} from '../pages/home';
 class LoggedInRouter extends React.Component {
     render() {
         return (
-            <div id="container">
-                <div id="navigation">
-                    <header>
-                        <ul>
-                            <li><Link to="home">Home</Link></li>
-                        </ul>
-                    </header>
-                </div>
-
-                <div id="main">
-                    <RouteHandler {...this.props} />
-                </div>
+            <div className="container">
+                <RouteHandler {...this.props} />
             </div>
         );
     }
