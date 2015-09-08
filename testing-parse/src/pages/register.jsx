@@ -1,7 +1,7 @@
-import React from 'react';
+import {React} from 'react';
 import {Link} from 'react-router';
 
-import {getData} from '../../common/request';
+import {getData} from '../common/request';
 
 class LoginPage extends React.Component {
     render() {
@@ -21,8 +21,8 @@ class LoginPage extends React.Component {
                                 <label class="sr-only" for="input-password">password</label>
                                 <input type="password" class="form-control" id="input-password" placeholder="password" />
                             </div>
-                            <button class="btn brn-lg btn-primary btn-block" onclick="">sign in</button>
-                            <Link to="register" class="btn brn-lg btn-default btn-block">register</Link>
+                            <button class="btn brn-lg btn-primary btn-block" onclick="">register</button>
+                            <Link to="login" class="btn brn-lg btn-default btn-block">sign in</Link>
                         </div>
                     </div>
                 </div>
@@ -33,7 +33,7 @@ class LoginPage extends React.Component {
     }
 
     static fetchData(params) {
-        return getData('/login');
+        return getData('/register');
     }
 }
 

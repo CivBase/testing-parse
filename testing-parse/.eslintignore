@@ -1,4 +1,1 @@
-build/
-static/js/vend/
-./*.js
-**/*.min.js
+src/js/vend/

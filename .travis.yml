@@ -9,3 +9,14 @@ before_install:
 
 before_script:
   - npm run lint
+
+notifications:
+  slack:
+    on_failure: always
+    on_success: never
+
+  email:
+    on_failure: never
+    on_success: never
+    recipients:
+      - unifiedbutterflyrecorder@gmail.com

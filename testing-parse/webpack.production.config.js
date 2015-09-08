@@ -18,6 +18,11 @@ module.exports = {
             '',
             '.js',
             '.jsx'
+        ],
+        modulesDirectories: [
+            'node_modules',
+            'src',
+            'test'
         ]
     }
 };

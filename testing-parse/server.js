@@ -44,7 +44,7 @@ app.post('/register', function(request, response) {
 });
 
 // start hot module replacement server
-if (!process.env.PRODUCTION) {
+if (!process.env.UBR_PRODUCTION) {
     var webpack = require('webpack');
     var WebpackDevServer = require('webpack-dev-server');
     var config = require('./webpack.local.config');

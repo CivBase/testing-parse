@@ -1,4 +1,4 @@
-import Parse from 'parse';
+import {Parse} from 'parse';
 
 let login = function(username, password) {
     return new Promise((resolve, reject) => {
@@ -16,6 +16,5 @@ let login = function(username, password) {
 let logout = function() {
     Parse.User.logOut();
 };
-
 
 export {login, logout};

@@ -1,11 +1,10 @@
 import '../node_modules/babel-core/polyfill';
-import React from 'react';
-import Router from 'react-router';
-import Parse from 'parse';
-import ParseReact from 'parse-react';
+import {React} from 'react';
+import {Router} from 'react-router';
+import {Parse} from 'parse';
 
-import LoggedInRouter from 'routers/logged_in';
-import LoggedOutRouter from 'routers/logged_out';
+import {LoggedInRouter} from 'routers/logged_in';
+import {LoggedOutRouter} from 'routers/logged_out';
 
 Parse.initialize(
     'tdJFpgEza9WzemOR6nu37ATOl3iBIct2APklvOo7',

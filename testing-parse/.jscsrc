@@ -62,7 +62,7 @@
   "disallowTrailingComma": true,
   "disallowTrailingWhitespace": true,
   "disallowYodaConditions": true,
-  "excludeFiles": ["./*/*"],
+  "excludeFiles": ["build/", "node_modules/", "src/", "test/"],
   "jsDoc": false,
   "maximumLineLength": 140,
   "maximumNumberOfLines": false,

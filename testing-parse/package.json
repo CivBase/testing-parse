@@ -7,7 +7,7 @@
   },
   "main": "static/main.jsx",
   "scripts": {
-    "lint": "eslint src/ test/ --ext .jsx,.js && jshint *.js && jscs *.js",
+    "lint": "eslint src/ test/ --ext .jsx,.js && jshint . && jscs .",
     "postinstall": "npm run build",
     "build": "webpack -p --config webpack.production.config.js",
     "test": "PHANTOMJS_BIN=./node_modules/.bin/phantomjs && ./node_modules/karma/bin/karma start karma.config.js",
