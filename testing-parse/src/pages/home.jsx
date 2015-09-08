@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router';
 
-import NavBar from '../common/components';
+import {NavBar} from '../common/components';
 
 class HomePage extends React.Component {
     render() {
