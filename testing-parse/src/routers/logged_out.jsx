@@ -1,8 +1,8 @@
-import {React} from 'react';
+import React from 'react';
 import {DefaultRoute, Link, Route, RouteHandler} from 'react-router';
 
-import {LoginPage} from '../pages/login';
-import {RegisterPage} from '../pages/register';
+import LoginPage from '../pages/login';
+import RegisterPage from '../pages/register';
 
 class LoggedOutRouter extends React.Component {
     render() {
