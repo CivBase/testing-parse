@@ -1,37 +1,43 @@
+import $ from 'jquery';
 import React from 'react';
 import {Link} from 'react-router';
 
-import {getData} from '../common/request';
+import * as auth from '../common/authentication';
+import {AuthPage} from '../common/components';
 
-class LoginPage extends React.Component {
-    render() {
+class LoginPage extends AuthPage {
+    renderContent() {
+        this.name = 'login';
         return (
-            <div id="login-page">
-                <div className="container first">
-                    <div className="form-auth">
-                        <div className="container-fluid">
-                            <h3 className="auth-header">Title</h3>
-                            <div className="form-group">
-                                <label className="sr-only" for="input-email">email</label>
-                                <input type="email" className="form-control" id="input-email" placeholder="email" />
-                            </div>
-                            <div className="form-group">
-                                <label className="sr-only" for="input-password">password</label>
-                                <input type="password" className="form-control" id="input-password" placeholder="password" />
-                            </div>
-                            <button className="btn brn-lg btn-primary btn-block" onclick="">sign in</button>
-                            <Link to="register" className="btn brn-lg btn-default btn-block">register</Link>
-                        </div>
+            <div className="form-auth">
+                <div className="container-fluid">
+                    <h3 className="auth-header">Login to an existing account</h3>
+                    <div className="form-group">
+                        <label className="sr-only" htmlFor="input-email">email</label>
+                        <input type="email" className="form-control" id="input-email" placeholder="email" />
                     </div>
+                    <div className="form-group">
+                        <label className="sr-only" htmlFor="input-password">password</label>
+                        <input type="password" className="form-control" id="input-password" placeholder="password" />
+                    </div>
+                    <button className="btn brn-lg btn-primary btn-block" onClick={this.login.bind(this)}>sign in</button>
+                    <Link to="register" className="btn brn-lg btn-default btn-block">register</Link>
                 </div>
-
-                <div id="alerts" className="container ontop"></div>
             </div>
         );
     }
 
-    static fetchData(params) {
-        return getData('/login');
+    login() {
+        let email = $('#input-email').val();
+        let password = $('#input-password').val();
+
+        auth.login(email, password)
+            .then((user) => {
+                this.transitionTo('/home');
+            })
+            .catch((user, error) => {
+                this.spawnError(error);
+            });
     }
 }
 

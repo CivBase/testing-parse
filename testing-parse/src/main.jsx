@@ -1,7 +1,7 @@
 import '../node_modules/babel-core/polyfill';
+import {Parse} from 'parse';
 import React from 'react';
 import Router from 'react-router';
-import {Parse} from 'parse';
 
 import LoggedInRouter from 'routers/logged_in';
 import LoggedOutRouter from 'routers/logged_out';

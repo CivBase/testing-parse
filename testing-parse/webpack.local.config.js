@@ -25,14 +25,6 @@ module.exports = {
                     'react-hot',
                     'babel-loader?stage=0'
                 ]
-            },
-            {
-                test: /\.css/,
-                exclude: /node_modules/,
-                loaders: [
-                    'react-hot',
-                    'css-loader!cssnext-loader'
-                ]
             }
         ]
     },
@@ -47,13 +39,5 @@ module.exports = {
             'src',
             'test'
         ]
-    },
-    cssnext: {
-        compress: true,
-        features: {
-            rem: false,
-            pseudoElements: false,
-            colorRgba: false
-        }
     }
 };

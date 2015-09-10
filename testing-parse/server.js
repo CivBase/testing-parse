@@ -21,6 +21,29 @@ app.get('*', function(request, response) {
     response.sendFile(__dirname + '/build/index.html');
 });
 
+app.post('/home', function(request, response) {
+    'use strict';
+
+    response.json({
+        title: 'Home Page'
+    });
+});
+
+app.post('/login', function(request, response) {
+    'use strict';
+
+    response.json({
+        title: 'Login Page'
+    });
+});
+
+app.post('/register', function(request, response) {
+    'use strict';
+
+    response.json({
+        title: 'Register Page'
+    });
+});
 
 // start hot module replacement server
 if (!process.env.UBR_PRODUCTION) {

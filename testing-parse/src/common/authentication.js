@@ -1,8 +1,8 @@
 import {Parse} from 'parse';
 
-let login = function(username, password) {
+let login = function(email, password) {
     return new Promise((resolve, reject) => {
-        Parse.User.logIn(username, password, {
+        Parse.User.logIn(email, password, {
             error: (user, error) => {
                 reject(user, error);
             },
@@ -15,6 +15,24 @@ let login = function(username, password) {
 
 let logout = function() {
     Parse.User.logOut();
+};
+
+let register = function(email, password) {
+    let user = new Parse.User();
+    user.set('email', email);
+    user.set('username', email);
+    user.set('password', password);
+
+    return new Promise((resolve, reject) => {
+        user.signUp(null, {
+            error: (newUser, error) => {
+                reject(newUser, error);
+            },
+            success: (newUser) => {
+                resolve(newUser);
+            }
+        });
+    });
 };
 
 export {login, logout};
