@@ -85,7 +85,8 @@ class TestObjectTable extends React.Component {
 
     createTestObject() {
         let foo = document.getElementById('input-foo').value;
-        let bar = document.getElementById('select-bar').options[e.selectedIndex].text;
+        let e = document.getElementById('select-bar');
+        let bar = e.options[e.selectedIndex].text;
         let testObject = new TestObject();
         testObject.save({
             bar: bar,

@@ -11,7 +11,6 @@ Parse.initialize(
     'BRdphJDIoKHK0VAAWx9HjRckBKbGEwuW7PrQLEWO'
 );
 
-// initialize routes depending on session
 let routes;
 if (Parse.User.current()) {
     routes = LoggedInRouter.getRoutes();
