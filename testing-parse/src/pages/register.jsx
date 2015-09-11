@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import {Parse} from 'parse';
 import React from 'react';
 import {Link} from 'react-router';
@@ -9,6 +8,7 @@ import {AuthPage} from '../common/components';
 class RegisterPage extends AuthPage {
     renderContent() {
         this.name = 'register';
+        this.title = 'Register Page';
         return (
             <div id="login-page">
                 <div className="container first">
@@ -35,8 +35,8 @@ class RegisterPage extends AuthPage {
     }
 
     register() {
-        let email = $('#input-email').val();
-        let password = $('#input-password').val();
+        let email = document.getElementById('input-email').value;
+        let password = document.getElementById('input-password').value;
 
         auth.register(email, password)
             .then((user) => {

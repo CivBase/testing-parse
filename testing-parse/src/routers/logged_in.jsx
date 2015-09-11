@@ -15,7 +15,7 @@ class LoggedInRouter extends React.Component {
     static getRoutes() {
         return (
             <Route name="app" path="/" handler={LoggedInRouter}>
-                <DefaultRoute name="home" handler={HomePage} />
+                <DefaultRoute name="home" path="home" handler={HomePage} />
             </Route>
         );
     }

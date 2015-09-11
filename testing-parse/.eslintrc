@@ -145,7 +145,7 @@
     "no-warning-comments": [0, { "terms": ["fixme", "xxx"], "location": "start" }],
     "no-with": 2,
 
-    "array-bracket-spacing": [2, "always"],
+    "array-bracket-spacing": [2, "never"],
     "arrow-parens": 2,
     "arrow-spacing": 2,
     "accessor-pairs": 0,
@@ -195,7 +195,7 @@
     "prefer-const": 0,
     "prefer-spread": 2,
     "prefer-reflect": 0,
-    "prefer-template": 2,
+    "prefer-template": 0,
     "quote-props": [2, "as-needed"],
     "quotes": [2, "single"],
     "radix": 2,

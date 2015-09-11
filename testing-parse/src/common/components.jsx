@@ -4,7 +4,6 @@ import reactMixin from 'react-mixin';
 import {Link, Navigation} from 'react-router';
 
 import * as auth from '../common/authentication';
-import {getData} from '../common/request';
 
 let alertId = 0;
 
@@ -54,17 +53,12 @@ class NavBar extends React.Component {
 }
 
 class PageComponent extends React.Component {
-    fetchData() {
-        return getData('/' + this.name).then((response) => {
-            document.title = response.title;
-        });
-    }
-
     render() {
         this.alerts = [];
         this.name = '';
+        this.title = '';
         let content = this.renderContent();
-        this.fetchData();
+        document.title = this.title;
         return content;
     }
 
@@ -142,4 +136,4 @@ class AuthPage extends PageComponent {
 
 reactMixin(AppPage.prototype, Navigation);
 
-export default {AppPage, AuthPage};
+export {AppPage, AuthPage};

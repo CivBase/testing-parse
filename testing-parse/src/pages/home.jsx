@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import {Parse} from 'parse';
 import ParseReact from 'parse-react';
 import React from 'react';
@@ -11,6 +10,7 @@ import {TestObject} from '../common/models';
 class HomePage extends AppPage {
     renderContent() {
         this.name = 'home';
+        this.title = 'Home Page';
         return (
             <div>
                 <h1>Butterflies</h1>
@@ -64,7 +64,7 @@ class TestObjectTable extends React.Component {
                     </tr>
                     </thead>
                     <tbody id="test-object-data">
-                        {this.data.testObjects.map(function(testObject) {
+                        {this.data.testObjects.map((testObject) => {
                             let row = (
                                 <TestObjectRow testObject={testObject} remove={self.removeTestObject.bind(testObject.id)} key={rowId} />
                             );
@@ -84,8 +84,8 @@ class TestObjectTable extends React.Component {
     }
 
     createTestObject() {
-        let foo = $('#input-foo').val();
-        let bar = $('#select-bar').find('option:selected').text();
+        let foo = document.getElementById('input-foo').value;
+        let bar = document.getElementById('select-bar').options[e.selectedIndex].text;
         let testObject = new TestObject();
         testObject.save({
             bar: bar,

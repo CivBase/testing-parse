@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import React from 'react';
 import {Link} from 'react-router';
 
@@ -8,6 +7,7 @@ import {AuthPage} from '../common/components';
 class LoginPage extends AuthPage {
     renderContent() {
         this.name = 'login';
+        this.title = 'Login Page';
         return (
             <div className="form-auth">
                 <div className="container-fluid">
@@ -28,8 +28,8 @@ class LoginPage extends AuthPage {
     }
 
     login() {
-        let email = $('#input-email').val();
-        let password = $('#input-password').val();
+        let email = document.getElementById('input-email').value;
+        let password = document.getElementById('input-password').value;
 
         auth.login(email, password)
             .then((user) => {
