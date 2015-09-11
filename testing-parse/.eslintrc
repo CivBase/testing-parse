@@ -26,20 +26,14 @@
     "experimentalObjectRestSpread": false
   },
   "globals": {
-    "$": false,
     "afterEach": false,
     "beforeEach": false,
     "describe": false,
     "document": false,
     "expect": false,
     "it": false,
-    "jQuery": false,
-    "Parse": false,
-    "React": false,
-    "require": false,
     "sinon": false,
-    "window": false,
-    "XMLHttpRequest": false
+    "window": false
   },
   "rules": {
     "no-alert": 0,
