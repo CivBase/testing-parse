@@ -3,7 +3,6 @@ import {DefaultRoute, Link, Route, RouteHandler} from 'react-router';
 
 import LoginPage from '../pages/login';
 import RegisterPage from '../pages/register';
-import HomePage from '../pages/home.jsx';
 
 class LoggedOutRouter extends React.Component {
     render() {
