@@ -3,11 +3,10 @@ import {Link} from 'react-router';
 
 import * as auth from '../common/authentication';
 import {AuthPage} from '../common/components';
+import {extend} from '../common/utils';
 
 class LoginPage extends AuthPage {
     renderContent() {
-        this.name = 'login';
-        this.title = 'Login Page';
         return (
             <div className="form-auth">
                 <div className="container-fluid">
@@ -33,12 +32,18 @@ class LoginPage extends AuthPage {
 
         auth.login(email, password)
             .then((user) => {
-                this.transitionTo('/home');
+                this.transitionTo('home');
             })
             .catch((user, error) => {
-                this.spawnError(error);
+                this.spawnError(error, 'Could not login with the given credentials.');
             });
     }
 }
+
+LoginPage.defaultProps = extend(LoginPage.defaultProps, {
+    bodyClass: 'alert-page auth-page',
+    name: 'login',
+    title: 'Login Page'
+});
 
 export default LoginPage;

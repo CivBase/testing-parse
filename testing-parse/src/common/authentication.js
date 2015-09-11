@@ -35,4 +35,4 @@ let register = function(email, password) {
     });
 };
 
-export {login, logout};
+export {login, logout, register};

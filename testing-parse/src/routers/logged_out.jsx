@@ -16,7 +16,7 @@ class LoggedOutRouter extends React.Component {
     static getRoutes() {
         return (
             <Route name="app" path="/" handler={LoggedOutRouter}>
-                <DefaultRoute name="login" path="login" handler={LoginPage} />
+                <DefaultRoute name="login" handler={LoginPage} />
                 <Route name="register" path="register" handler={RegisterPage} />
             </Route>
         );

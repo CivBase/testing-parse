@@ -2,15 +2,13 @@ import {Parse} from 'parse';
 import ParseReact from 'parse-react';
 import React from 'react';
 import reactMixin from 'react-mixin';
-import {Link} from 'react-router';
 
 import {AppPage} from '../common/components';
 import {TestObject} from '../common/models';
+import {extend, getSelectedOptionById} from '../common/utils';
 
 class HomePage extends AppPage {
     renderContent() {
-        this.name = 'home';
-        this.title = 'Home Page';
         return (
             <div>
                 <h1>Butterflies</h1>
@@ -21,6 +19,12 @@ class HomePage extends AppPage {
     }
 }
 
+HomePage.defaultProps = extend(HomePage.defaultProps, {
+    bodyClass: 'alert-page nav-page',
+    name: 'home',
+    title: 'Home Page'
+});
+
 class TestObjectTable extends React.Component {
     render() {
         let errors = this.queryErrors();
@@ -30,8 +34,10 @@ class TestObjectTable extends React.Component {
             }
             this.props.page.spawnError(errors[i]);
         }
+
         let self = this;
         let rowId = 0;
+
         return (
             <div>
                 <div className="well">
@@ -85,22 +91,19 @@ class TestObjectTable extends React.Component {
 
     createTestObject() {
         let foo = document.getElementById('input-foo').value;
-        let e = document.getElementById('select-bar');
-        let bar = e.options[e.selectedIndex].text;
-        let testObject = new TestObject();
-        testObject.save({
-            bar: bar,
-            foo: foo
-        }, {
-            error: (newTestObject, error) => {
-                this.props.page.spawnError(error);
-            },
-            success: (newTestObject) => {
-                this.props.page.spawnAlert('info', 'Successfully created a new TestObject with ID: ' + newTestObject.id);
+        let bar = getSelectedOptionById('select-bar').text;
+
+        ParseReact.Mutation.Create('TestObject', {
+                bar: bar,
+                foo: foo
+            })
+            .dispatch()
+            .then((testObject) => {
                 this.refreshQueries(['testObjects']);
-                this.render();
-            }
-        });
+            })
+            .catch((testObject, error) => {
+                this.props.page.spawnError(error);
+            });
     }
 
     removeTestObject(id) {
@@ -108,17 +111,19 @@ class TestObjectTable extends React.Component {
             if (!this.data.testObjects.hasOwnProperty(i) || this.data.testObjects[i].id !== id) {
                 continue;
             }
-            this.data.testObjects[i].destroy({
-                error: (testObject, error) => {
+
+            ParseReact.Mutation.Destroy(this.data.testObjects[i])
+                .dispatch()
+                .then((testObject) => {
+                    this.refreshQueries(['testObjects']);
+                })
+                .catch((testObject, error) => {
                     this.props.page.spawnError(error);
-                },
-                success: (testObject) => {
-                    this.data.testObjects.splice(this.data.testObjects.indexOf(testObject), 1);
-                    this.render();
-                }
-            });
+                });
+
             return;
         }
+
         this.props.page.spawnAlert('danger', 'No TestObject found with ID: ' + id);
     }
 }

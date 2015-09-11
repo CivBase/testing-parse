@@ -4,11 +4,10 @@ import {Link} from 'react-router';
 
 import * as auth from '../common/authentication';
 import {AuthPage} from '../common/components';
+import {extend} from '../common/utils';
 
 class RegisterPage extends AuthPage {
     renderContent() {
-        this.name = 'register';
-        this.title = 'Register Page';
         return (
             <div id="login-page">
                 <div className="container first">
@@ -24,7 +23,7 @@ class RegisterPage extends AuthPage {
                                 <input type="password" className="form-control" id="input-password" placeholder="password" />
                             </div>
                             <button className="btn brn-lg btn-primary btn-block" onClick={this.register.bind(this)}>register</button>
-                            <Link to="login" className="btn brn-lg btn-default btn-block">sign in</Link>
+                            <Link to="login" className="btn brn-lg btn-default btn-block">login</Link>
                         </div>
                     </div>
                 </div>
@@ -40,12 +39,18 @@ class RegisterPage extends AuthPage {
 
         auth.register(email, password)
             .then((user) => {
-                this.transitionTo('/home');
+                this.transitionTo('home');
             })
             .catch((user, error) => {
-                this.spawnError(error);
+                this.spawnError(error, 'Could not create an account with the given credentials.');
             });
     }
 }
+
+RegisterPage.defaultProps = extend(RegisterPage.defaultProps, {
+    bodyClass: 'alert-page auth-page',
+    name: 'register',
+    title: 'Register Page'
+});
 
 export default RegisterPage;

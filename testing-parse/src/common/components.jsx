@@ -10,7 +10,7 @@ let alertId = 0;
 class Alert extends React.Component {
     render() {
         return (
-            <div className="alert alert-{this.props.alertType} alert-dismissible" role="alert">
+            <div className={'alert alert-' + this.props.alertType + ' alert-dismissible'} role="alert">
                 <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -54,16 +54,13 @@ class NavBar extends React.Component {
 
 class PageComponent extends React.Component {
     render() {
-        this.alerts = [];
-        this.name = '';
-        this.title = '';
-        let content = this.renderContent();
-        document.title = this.title;
-        return content;
+        document.body.className = this.props.bodyClass;
+        document.title = this.props.title;
+        return this.renderContent();
     }
 
     spawnAlert(alertType, message) {
-        this.alerts.push(<Alert alertType={alertType} message={message} key={alertId} />);
+        this.props.alerts.push(<Alert alertType={alertType} message={message} key={alertId} />);
         alertId += 1;
 
         window.setTimeout(() => {
@@ -73,19 +70,15 @@ class PageComponent extends React.Component {
 
             let self = this;
             alert.slideUp(500, () => {
-                self.alerts.shift();
+                self.props.alerts.shift();
             });
         }, 5000);
-
-        React.render(
-            <div>{this.alerts}</div>,
-            document.getElementById('alerts')
-        );
     }
 
-    spawnError(error) {
+    spawnError(error, undefinedMessage) {
         if (error === undefined) {
-            this.spawnAlert('danger', 'Undefined Error');
+            undefinedMessage = undefinedMessage || 'Undefined Error';
+            this.spawnAlert('danger', undefinedMessage);
             return;
         }
 
@@ -93,18 +86,24 @@ class PageComponent extends React.Component {
     }
 }
 
+PageComponent.defaultProps = {
+    alerts: [],
+    bodyClass: '',
+    name: '',
+    title: ''
+};
+
 class AppPage extends PageComponent {
     render() {
         let content = super.render();
-        document.body.className = 'alert-page nav-page';
         return (
-            <div id={this.name + '-page'}>
+            <div id={this.props.name + '-page'}>
                 <NavBar logout={this.logout.bind(this)} />
 
                 <div id="main" className="container first">
                     <div id="content">{content}</div>
                     <div id="alerts" className="container ontop">
-                        <div>{this.alerts}</div>
+                        <div>{this.props.alerts}</div>
                     </div>
                 </div>
             </div>
@@ -113,20 +112,19 @@ class AppPage extends PageComponent {
 
     logout() {
         auth.logout();
-        this.transitionTo('/login');
+        this.transitionTo('login');
     }
 }
 
 class AuthPage extends PageComponent {
     render() {
         let content = super.render();
-        document.body.className = 'alert-page auth-page';
         return (
-            <div id={this.name + '-page'}>
+            <div id={this.props.name + '-page'}>
                 <div id= "main" className="container first">
                     <div id="content">{content}</div>
                     <div id="alerts" className="container ontop">
-                        <div>{this.alerts}</div>
+                        <div>{this.props.alerts}</div>
                     </div>
                 </div>
             </div>
