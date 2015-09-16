@@ -1,38 +1,44 @@
 import {Parse} from 'parse';
 
-let login = function(email, password) {
-    return new Promise((resolve, reject) => {
-        Parse.User.logIn(email, password, {
-            error: (user, error) => {
-                reject(user, error);
-            },
-            success: (user) => {
-                resolve(user);
-            }
+class Authentication {
+    getUser() {
+        return Parse.User.current();
+    }
+
+    login(email, password) {
+        return new Promise((resolve, reject) => {
+            Parse.User.logIn(email, password, {
+                error: (user, error) => {
+                    reject(user, error);
+                },
+                success: (user) => {
+                    resolve(user);
+                }
+            });
         });
-    });
-};
+    }
 
-let logout = function() {
-    Parse.User.logOut();
-};
+    logout() {
+        Parse.User.logOut();
+    }
 
-let register = function(email, password) {
-    let user = new Parse.User();
-    user.set('email', email);
-    user.set('username', email);
-    user.set('password', password);
+    register(email, password) {
+        let user = new Parse.User();
+        user.set('email', email);
+        user.set('username', email);
+        user.set('password', password);
 
-    return new Promise((resolve, reject) => {
-        user.signUp(null, {
-            error: (newUser, error) => {
-                reject(newUser, error);
-            },
-            success: (newUser) => {
-                resolve(newUser);
-            }
+        return new Promise((resolve, reject) => {
+            user.signUp(null, {
+                error: (newUser, error) => {
+                    reject(newUser, error);
+                },
+                success: (newUser) => {
+                    resolve(newUser);
+                }
+            });
         });
-    });
-};
+    }
+}
 
-export {login, logout, register};
+export default Authentication;

@@ -1,9 +1,9 @@
 import $ from 'jquery';
 import React from 'react';
-import reactMixin from 'react-mixin';
-import {Link, Navigation} from 'react-router';
+import {Link, PropTypes} from 'react-router';
 
-import * as auth from '../common/authentication';
+import auth from '../common/authentication';
+import history from '../history';
 
 let alertId = 0;
 
@@ -39,9 +39,9 @@ class NavBar extends React.Component {
                         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                             <ul className="nav navbar-nav navbar-right">
                                 <li>
-                                    <a href="#" onClick={this.props.logout}>
+                                    <Link onClick={this.props.logout}>
                                         Log out <span className="glyphicon glyphicon-log-out"></span>
-                                    </a>
+                                    </Link>
                                 </li>
                             </ul>
                         </div>
@@ -53,15 +53,20 @@ class NavBar extends React.Component {
 }
 
 class PageComponent extends React.Component {
-    render() {
+    componentWillMount() {
         document.body.className = this.props.bodyClass;
         document.title = this.props.title;
-        return this.renderContent();
     }
 
     spawnAlert(alertType, message) {
-        this.props.alerts.push(<Alert alertType={alertType} message={message} key={alertId} />);
+        this.props.alerts.push(
+            <Alert alertType={alertType} message={message} key={alertId} />
+        );
+
         alertId += 1;
+        this.setState({
+            numAlerts: this.state.numAlerts + 1
+        });
 
         window.setTimeout(() => {
             let alert = $('#alerts').find('.alert:not(".fading")').first();
@@ -71,13 +76,15 @@ class PageComponent extends React.Component {
             let self = this;
             alert.slideUp(500, () => {
                 self.props.alerts.shift();
+                this.setState({
+                    numAlerts: this.state.numAlerts - 1
+                });
             });
         }, 5000);
     }
 
-    spawnError(error, undefinedMessage) {
+    spawnError(error, undefinedMessage = 'Undefined Error') {
         if (error === undefined) {
-            undefinedMessage = undefinedMessage || 'Undefined Error';
             this.spawnAlert('danger', undefinedMessage);
             return;
         }
@@ -95,7 +102,7 @@ PageComponent.defaultProps = {
 
 class AppPage extends PageComponent {
     render() {
-        let content = super.render();
+        let content = this.renderContent();
         return (
             <div id={this.props.name + '-page'}>
                 <NavBar logout={this.logout.bind(this)} />
@@ -103,7 +110,7 @@ class AppPage extends PageComponent {
                 <div id="main" className="container first">
                     <div id="content">{content}</div>
                     <div id="alerts" className="container ontop">
-                        <div>{this.props.alerts}</div>
+                        {this.props.alerts}
                     </div>
                 </div>
             </div>
@@ -112,26 +119,24 @@ class AppPage extends PageComponent {
 
     logout() {
         auth.logout();
-        this.transitionTo('login');
+        history.pushState(null, '/login');
     }
 }
 
 class AuthPage extends PageComponent {
     render() {
-        let content = super.render();
+        let content = this.renderContent();
         return (
             <div id={this.props.name + '-page'}>
                 <div id= "main" className="container first">
                     <div id="content">{content}</div>
                     <div id="alerts" className="container ontop">
-                        <div>{this.props.alerts}</div>
+                        {this.props.alerts}
                     </div>
                 </div>
             </div>
         );
     }
 }
-
-reactMixin(AppPage.prototype, Navigation);
 
 export {AppPage, AuthPage};

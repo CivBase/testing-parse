@@ -1,11 +1,12 @@
 import {Parse} from 'parse';
 import ParseReact from 'parse-react';
 import React from 'react';
-import reactMixin from 'react-mixin';
 
 import {AppPage} from '../common/components';
 import {TestObject} from '../common/models';
 import {extend, getSelectedOptionById} from '../common/utils';
+
+let ParseComponent = ParseReact.Component(React);
 
 class HomePage extends AppPage {
     renderContent() {
@@ -25,8 +26,8 @@ HomePage.defaultProps = extend(HomePage.defaultProps, {
     title: 'Home Page'
 });
 
-class TestObjectTable extends React.Component {
-    render() {
+class TestObjectTable extends ParseComponent {
+    componentWillUpdate() {
         let errors = this.queryErrors();
         for (let i in errors) {
             if (!errors.hasOwnProperty(i)) {
@@ -34,7 +35,9 @@ class TestObjectTable extends React.Component {
             }
             this.props.page.spawnError(errors[i]);
         }
+    }
 
+    render() {
         let self = this;
         let rowId = 0;
 
@@ -83,7 +86,7 @@ class TestObjectTable extends React.Component {
         );
     }
 
-    observe() {
+    observe(props, state) {
         return {
             testObjects: new Parse.Query(TestObject)
         };
@@ -94,9 +97,9 @@ class TestObjectTable extends React.Component {
         let bar = getSelectedOptionById('select-bar').text;
 
         ParseReact.Mutation.Create('TestObject', {
-                bar: bar,
-                foo: foo
-            })
+            bar: bar,
+            foo: foo
+        })
             .dispatch()
             .then((testObject) => {
                 this.refreshQueries(['testObjects']);
@@ -146,7 +149,5 @@ class TestObjectRow extends React.Component {
         );
     }
 }
-
-reactMixin(TestObjectTable.prototype, ParseReact.Mixin);
 
 export default HomePage;
