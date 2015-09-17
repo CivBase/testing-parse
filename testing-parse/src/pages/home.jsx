@@ -58,7 +58,7 @@ class TestObjectTable extends ParseComponent {
                                 <option>West</option>
                             </select>
                         </div>
-                        <button className="btn btn-primary pull-right" onClick={this.createTestObject.bind()}>Create</button>
+                        <button className="btn btn-primary pull-right" onClick={this.createTestObject.bind(this)}>Create</button>
                     </div>
                 </div>
                 <table className="table table-striped table-hover">
@@ -75,7 +75,7 @@ class TestObjectTable extends ParseComponent {
                     <tbody id="test-object-data">
                         {this.data.testObjects.map((testObject) => {
                             let row = (
-                                <TestObjectRow testObject={testObject} remove={self.removeTestObject.bind(testObject.id)} key={rowId} />
+                                <TestObjectRow testObject={testObject} remove={self.removeTestObject.bind(this, testObject.id)} key={rowId} />
                             );
                             rowId += 1;
                             return row;
@@ -99,14 +99,7 @@ class TestObjectTable extends ParseComponent {
         ParseReact.Mutation.Create('TestObject', {
             bar: bar,
             foo: foo
-        })
-            .dispatch()
-            .then((testObject) => {
-                this.refreshQueries(['testObjects']);
-            })
-            .catch((testObject, error) => {
-                this.props.page.spawnError(error);
-            });
+        }).dispatch();
     }
 
     removeTestObject(id) {
@@ -115,15 +108,7 @@ class TestObjectTable extends ParseComponent {
                 continue;
             }
 
-            ParseReact.Mutation.Destroy(this.data.testObjects[i])
-                .dispatch()
-                .then((testObject) => {
-                    this.refreshQueries(['testObjects']);
-                })
-                .catch((testObject, error) => {
-                    this.props.page.spawnError(error);
-                });
-
+            ParseReact.Mutation.Destroy(this.data.testObjects[i]).dispatch();
             return;
         }
 
