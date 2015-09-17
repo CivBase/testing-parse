@@ -1,7 +1,7 @@
 import '../node_modules/babel-core/polyfill';
 import {Parse} from 'parse';
 import React from 'react';
-import {Route, Router} from 'react-router';
+import {IndexRoute, Route, Router} from 'react-router';
 
 import auth from 'common/authentication';
 import history from 'history';
@@ -26,7 +26,7 @@ let requireAuth = function(nextState, replaceState) {
 React.render((
     <Router history={history}>
         <Route path="/" component={RootPage}>
-            <Route path="login" component={LoginPage} />
+            <IndexRoute path="login" component={LoginPage} />
             <Route path="register" component={RegisterPage} />
             <Route path="home" component={HomePage} onEnter={requireAuth} />
         </Route>
