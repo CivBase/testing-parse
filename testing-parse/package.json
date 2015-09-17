@@ -13,7 +13,8 @@
     "test": "PHANTOMJS_BIN=./node_modules/.bin/phantomjs && ./node_modules/karma/bin/karma start karma.config.js",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "server": "node server.js",
-    "clean": "rm -r build/"
+    "clean": "rm build/app.js",
+    "superclean": "npm run clean && rm -r node_modules && npm install"
   },
   "devDependencies": {
     "coveralls": "^2.11.4",
