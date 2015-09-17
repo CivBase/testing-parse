@@ -11,7 +11,7 @@ class LoginPage extends AuthPage {
         return (
             <div className="form-auth">
                 <div className="container-fluid">
-                    <form onSubmit={this.login}>
+                    <form onSubmit={this.login.bind(this)}>
                         <h3 className="auth-header">Login to an existing account</h3>
                         <div className="form-group">
                             <label className="sr-only" htmlFor="input-email">email</label>

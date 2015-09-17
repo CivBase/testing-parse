@@ -7,11 +7,19 @@ import {extend} from '../common/utils';
 import history from '../history';
 
 class RegisterPage extends AuthPage {
+    componentWillMount() {
+        if (auth.getUser()) {
+            history.pushState(null, '/home');
+        }
+
+        super.componentWillMount();
+    }
+
     renderContent() {
         return (
             <div className="form-auth">
                 <div className="container-fluid">
-                    <form onSubmit={this.register}>
+                    <form onSubmit={this.register.bind(this)}>
                         <h3 className="auth-header">Register for a new account</h3>
                         <div className="form-group">
                             <label className="sr-only" htmlFor="input-email">email</label>
@@ -22,7 +30,7 @@ class RegisterPage extends AuthPage {
                             <input type="password" className="form-control" id="input-password" placeholder="password" ref="password" />
                         </div>
                         <button className="btn brn-lg btn-primary btn-block" type="submit">register</button>
-                        <Link to="/login" className="btn brn-lg btn-default btn-block">login</Link>
+                        <Link to="/" className="btn brn-lg btn-default btn-block">login</Link>
                     </form>
                 </div>
             </div>

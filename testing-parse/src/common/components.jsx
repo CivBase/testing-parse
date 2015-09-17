@@ -119,7 +119,7 @@ class AppPage extends PageComponent {
 
     logout() {
         auth.logout();
-        history.pushState(null, '/login');
+        history.pushState(null, '/');
     }
 }
 

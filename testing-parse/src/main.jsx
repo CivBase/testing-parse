@@ -26,7 +26,7 @@ let requireAuth = function(nextState, replaceState) {
 React.render((
     <Router history={history}>
         <Route path="/" component={RootPage}>
-            <IndexRoute path="login" component={LoginPage} />
+            <IndexRoute component={LoginPage} />
             <Route path="register" component={RegisterPage} />
             <Route path="home" component={HomePage} onEnter={requireAuth} />
         </Route>

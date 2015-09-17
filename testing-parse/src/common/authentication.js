@@ -1,11 +1,11 @@
 import {Parse} from 'parse';
 
 class Authentication {
-    getUser() {
+    static getUser() {
         return Parse.User.current();
     }
 
-    login(email, password) {
+    static login(email, password) {
         return new Promise((resolve, reject) => {
             Parse.User.logIn(email, password, {
                 error: (user, error) => {
@@ -18,11 +18,11 @@ class Authentication {
         });
     }
 
-    logout() {
+    static logout() {
         Parse.User.logOut();
     }
 
-    register(email, password) {
+    static register(email, password) {
         let user = new Parse.User();
         user.set('email', email);
         user.set('username', email);
