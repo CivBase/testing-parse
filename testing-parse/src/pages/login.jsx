@@ -7,6 +7,14 @@ import {extend} from '../common/utils';
 import history from '../history';
 
 class LoginPage extends AuthPage {
+    componentWillMount() {
+        if (auth.getUser()) {
+            history.pushState(null, '/#/home');
+        }
+
+        super.componentWillMount();
+    }
+
     renderContent() {
         return (
             <div className="form-auth">
@@ -36,7 +44,7 @@ class LoginPage extends AuthPage {
 
         auth.login(email, password)
             .then((user) => {
-                history.replaceState(null, '/home');
+                history.pushState(null, '/#/home');
             })
             .catch((user, error) => {
                 this.spawnError(error, 'Could not login with the given credentials.');

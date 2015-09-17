@@ -19,7 +19,7 @@ let requireAuth = function(nextState, replaceState) {
     if (!auth.getUser()) {
         replaceState({
             nextPathname: nextState.location.pathname
-        }, '/login');
+        }, '/#/login');
     }
 };
 

@@ -7,14 +7,6 @@ import {extend} from '../common/utils';
 import history from '../history';
 
 class RegisterPage extends AuthPage {
-    componentWillMount() {
-        if (auth.getUser()) {
-            history.pushState(null, '/home');
-        }
-
-        super.componentWillMount();
-    }
-
     renderContent() {
         return (
             <div className="form-auth">
@@ -44,7 +36,7 @@ class RegisterPage extends AuthPage {
 
         auth.register(email, password)
             .then((user) => {
-                history.pushState(null, '/home');
+                history.pushState(null, '/#/home');
             })
             .catch((user, error) => {
                 this.spawnError(error, 'Could not create an account with the given credentials.');
