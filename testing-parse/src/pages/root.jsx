@@ -10,4 +10,8 @@ class RootPage extends React.Component {
     }
 }
 
+RootPage.propTypes = {
+    children: React.PropTypes.list
+};
+
 export default RootPage;

@@ -1,8 +1,9 @@
 import $ from 'jquery';
 import React from 'react';
-import {Link, PropTypes} from 'react-router';
+import {Link} from 'react-router';
 
 import auth from '../common/authentication';
+import {extend} from '../common/utils';
 import history from '../history';
 
 let alertId = 0;
@@ -19,6 +20,11 @@ class Alert extends React.Component {
         );
     }
 }
+
+Alert.propTypes = {
+    alertType: React.PropTypes.string,
+    message: React.PropTypes.string
+};
 
 class NavBar extends React.Component {
     render() {
@@ -52,6 +58,10 @@ class NavBar extends React.Component {
     }
 }
 
+NavBar.propTypes = {
+    logout: React.PropTypes.func
+};
+
 class PageComponent extends React.Component {
     componentWillMount() {
         document.body.className = this.props.bodyClass;
@@ -69,11 +79,11 @@ class PageComponent extends React.Component {
         });
 
         window.setTimeout(() => {
-            let alert = $('#alerts').find('.alert:not(".fading")').first();
+            const alert = $('#alerts').find('.alert:not(".fading")').first();
             alert.addClass('fading');
             alert.fadeTo(1500, 0);
 
-            let self = this;
+            const self = this;
             alert.slideUp(500, () => {
                 self.props.alerts.shift();
                 this.setState({
@@ -100,9 +110,19 @@ PageComponent.defaultProps = {
     title: ''
 };
 
+PageComponent.propTypes = {
+    bodyClass: React.PropTypes.string,
+    title: React.PropTypes.string
+};
+
 class AppPage extends PageComponent {
+    logout() {
+        auth.logout();
+        history.pushState(null, '/#/login');
+    }
+
     render() {
-        let content = this.renderContent();
+        const content = this.renderContent();
         return (
             <div id={this.props.name + '-page'}>
                 <NavBar logout={this.logout.bind(this)} />
@@ -116,16 +136,16 @@ class AppPage extends PageComponent {
             </div>
         );
     }
-
-    logout() {
-        auth.logout();
-        history.pushState(null, '/#/');
-    }
 }
+
+AppPage.propTypes = extend(AppPage.propTypes, {
+    alerts: React.PropTypes.list,
+    name: React.PropTypes.string
+});
 
 class AuthPage extends PageComponent {
     render() {
-        let content = this.renderContent();
+        const content = this.renderContent();
         return (
             <div id={this.props.name + '-page'}>
                 <div id= "main" className="container first">
@@ -138,5 +158,10 @@ class AuthPage extends PageComponent {
         );
     }
 }
+
+AuthPage.propTypes = extend(AuthPage.propTypes, {
+    alerts: React.PropTypes.list,
+    name: React.PropTypes.string
+});
 
 export {AppPage, AuthPage};

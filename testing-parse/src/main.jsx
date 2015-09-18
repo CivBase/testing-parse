@@ -11,13 +11,12 @@ import RegisterPage from 'pages/register';
 import RootPage from 'pages/root';
 import WelcomePage from 'pages/welcome';
 
-
 Parse.initialize(
     'tdJFpgEza9WzemOR6nu37ATOl3iBIct2APklvOo7',
     'BRdphJDIoKHK0VAAWx9HjRckBKbGEwuW7PrQLEWO'
 );
 
-let requireAuth = (nextState, replaceState) => {
+const requireAuth = function(nextState, replaceState) {
     if (!auth.getUser()) {
         replaceState({
             nextPathname: nextState.location.pathname
@@ -25,7 +24,7 @@ let requireAuth = (nextState, replaceState) => {
     }
 };
 
-React.render(
+React.render((
     <Router history={history}>
         <Route path="/" component={RootPage}>
             <IndexRoute component={WelcomePage} />
@@ -34,4 +33,4 @@ React.render(
             <Route path="home" component={HomePage} onEnter={requireAuth} />
         </Route>
     </Router>
-, document.getElementById('app'));
+), document.getElementById('app'));

@@ -22,7 +22,7 @@ class RegisterPage extends AuthPage {
                             <input type="password" className="form-control" id="input-password" placeholder="password" ref="password" />
                         </div>
                         <button className="btn brn-lg btn-primary btn-block" type="submit">register</button>
-                        <Link to="/" className="btn brn-lg btn-default btn-block">login</Link>
+                        <Link to="/login" className="btn brn-lg btn-default btn-block">login</Link>
                     </form>
                 </div>
             </div>
@@ -31,8 +31,8 @@ class RegisterPage extends AuthPage {
 
     register(event) {
         event.preventDefault();
-        let email = findDOMNode(this.refs.email).value;
-        let password = findDOMNode(this.refs.password).value;
+        const email = findDOMNode(this.refs.email).value;
+        const password = findDOMNode(this.refs.password).value;
 
         auth.register(email, password)
             .then((user) => {

@@ -23,7 +23,7 @@ class Authentication {
     }
 
     static register(email, password) {
-        let user = new Parse.User();
+        const user = new Parse.User();
         user.set('email', email);
         user.set('username', email);
         user.set('password', password);

@@ -1,9 +1,9 @@
 if (typeof Function.prototype.bind !== 'function') {
-    Function.prototype.bind = function bind(obj) {
-        let args = Array.prototype.slice.call(arguments, 1);
-        let self = this;
-        let Nop = function() {};
-        let bound = function() {
+    Function.prototype.bind = function(obj) {
+        const args = Array.prototype.slice.call(arguments, 1);
+        const self = this;
+        const Nop = function() {};
+        const bound = function() {
             return self.apply(
                 this instanceof Nop ? this : (obj || {}), args.concat(
                     Array.prototype.slice.call(arguments)

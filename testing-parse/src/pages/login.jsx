@@ -39,8 +39,8 @@ class LoginPage extends AuthPage {
 
     login(event) {
         event.preventDefault();
-        let email = findDOMNode(this.refs.email).value;
-        let password = findDOMNode(this.refs.password).value;
+        const email = findDOMNode(this.refs.email).value;
+        const password = findDOMNode(this.refs.password).value;
 
         auth.login(email, password)
             .then((user) => {

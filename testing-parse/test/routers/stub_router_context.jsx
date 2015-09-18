@@ -1,7 +1,7 @@
 import React from 'react';
 
-let stubRouterContext = function(Component, props, stubs) {
-    let RouterStub = function() {};
+const stubRouterContext = function(Component, props, stubs) {
+    const RouterStub = function() {};
 
     Object.assign(RouterStub, {
         getRouteAtDepth() {},

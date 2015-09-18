@@ -1,22 +1,17 @@
 {
-  "bitwise": false,
-  "curly": true,
-  "forin": true,
-  "freeze": true,
-  "predef": [
-    "__dirname",
-    "console",
-    "module",
-    "process",
-    "require"
-  ],
+  "browser": true,
+  "jquery": true,
+  "node": true,
+  "esnext": true,
+  "camelcase": true,
+  "eqeqeq": true,
+  "indent": 4,
   "latedef": true,
-  "maxcomplexity": 11,
-  "nocomma": true,
-  "nonbsp": true,
-  "nonew": true,
+  "maxlen": 80,
+  "newcap": true,
   "quotmark": "single",
   "strict": true,
   "undef": true,
-  "unused": true
+  "unused": true,
+  "eqnull": true
 }

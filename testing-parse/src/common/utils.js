@@ -1,13 +1,13 @@
-let extend = function(destination, source) {
-    let out = {};
-    for (let property in destination) {
+const extend = function(destination, source) {
+    const out = {};
+    for (const property in destination) {
         if (!destination.hasOwnProperty(property)) {
             continue;
         }
         out[property] = destination[property];
     }
 
-    for (let property in source) {
+    for (const property in source) {
         if (!source.hasOwnProperty(property)) {
             continue;
         }
@@ -17,8 +17,8 @@ let extend = function(destination, source) {
     return out;
 };
 
-let getSelectedOptionById = function(id) {
-    let e = document.getElementById('select-bar');
+const getSelectedOptionById = function(id) {
+    const e = document.getElementById(id);
     return e.options[e.selectedIndex];
 };
 

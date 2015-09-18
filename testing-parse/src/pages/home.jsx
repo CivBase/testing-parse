@@ -6,7 +6,7 @@ import {AppPage} from '../common/components';
 import {TestObject} from '../common/models';
 import {extend, getSelectedOptionById} from '../common/utils';
 
-let ParseComponent = ParseReact.Component(React);
+const ParseComponent = ParseReact.Component(React);
 
 class HomePage extends AppPage {
     renderContent() {
@@ -28,8 +28,8 @@ HomePage.defaultProps = extend(HomePage.defaultProps, {
 
 class TestObjectTable extends ParseComponent {
     componentWillUpdate() {
-        let errors = this.queryErrors();
-        for (let i in errors) {
+        const errors = this.queryErrors();
+        for (const i in errors) {
             if (!errors.hasOwnProperty(i)) {
                 continue;
             }
@@ -37,8 +37,37 @@ class TestObjectTable extends ParseComponent {
         }
     }
 
+    createTestObject() {
+        const foo = document.getElementById('input-foo').value;
+        const bar = getSelectedOptionById('select-bar').text;
+
+        ParseReact.Mutation.Create('TestObject', {
+            bar: bar,
+            foo: foo
+        }).dispatch();
+    }
+
+    observe(props, state) {
+        return {
+            testObjects: new Parse.Query(TestObject)
+        };
+    }
+
+    removeTestObject(id) {
+        for (const i in this.data.testObjects) {
+            if (!this.data.testObjects.hasOwnProperty(i) || this.data.testObjects[i].id !== id) {
+                continue;
+            }
+
+            ParseReact.Mutation.Destroy(this.data.testObjects[i]).dispatch();
+            return;
+        }
+
+        this.props.page.spawnAlert('danger', 'No TestObject found with ID: ' + id);
+    }
+
     render() {
-        let self = this;
+        const self = this;
         let rowId = 0;
 
         return (
@@ -73,48 +102,23 @@ class TestObjectTable extends ParseComponent {
                     </tr>
                     </thead>
                     <tbody id="test-object-data">
-                        {this.data.testObjects.map((testObject) => {
-                            let row = (
-                                <TestObjectRow testObject={testObject} remove={self.removeTestObject.bind(this, testObject.id)} key={rowId} />
-                            );
-                            rowId += 1;
-                            return row;
-                        })}
+                    {this.data.testObjects.map((testObject) => {
+                        const row = (
+                            <TestObjectRow testObject={testObject} remove={self.removeTestObject.bind(this, testObject.id)} key={rowId} />
+                        );
+                        rowId += 1;
+                        return row;
+                    })}
                     </tbody>
                 </table>
             </div>
         );
     }
-
-    observe(props, state) {
-        return {
-            testObjects: new Parse.Query(TestObject)
-        };
-    }
-
-    createTestObject() {
-        let foo = document.getElementById('input-foo').value;
-        let bar = getSelectedOptionById('select-bar').text;
-
-        ParseReact.Mutation.Create('TestObject', {
-            bar: bar,
-            foo: foo
-        }).dispatch();
-    }
-
-    removeTestObject(id) {
-        for (let i in this.data.testObjects) {
-            if (!this.data.testObjects.hasOwnProperty(i) || this.data.testObjects[i].id !== id) {
-                continue;
-            }
-
-            ParseReact.Mutation.Destroy(this.data.testObjects[i]).dispatch();
-            return;
-        }
-
-        this.props.page.spawnAlert('danger', 'No TestObject found with ID: ' + id);
-    }
 }
+
+TestObjectTable.propTypes = {
+    page: React.PropTypes.component
+};
 
 class TestObjectRow extends React.Component {
     render() {
@@ -134,5 +138,10 @@ class TestObjectRow extends React.Component {
         );
     }
 }
+
+TestObjectRow.propTypes = {
+    remove: React.PropTypes.func,
+    testObject: React.PropTypes.object
+};
 
 export default HomePage;
