@@ -2,7 +2,21 @@ language:
   node_js
 
 node_js:
-  stable
+  - "0.10"
 
-script:
-  node_modules/grunt-cli/bin/grunt
+before_install:
+  - cd testing-parse
+
+before_script:
+  - npm run lint
+
+notifications:
+  slack:
+    on_failure: always
+    on_success: never
+
+  email:
+    on_failure: never
+    on_success: never
+    recipients:
+      - unifiedbutterflyrecorder@gmail.com

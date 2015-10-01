@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb",
+  "rules": {
+    "comma-dangle": [2, "never"],
+    "func-names": 0,
+    "indent": [2, 4],
+    "jsx-quotes": 2,
+    "new-cap": 0,
+    "no-extend-native": 0,
+    "no-unused-vars": [0, {"vars": "all", "args": "none"}],
+    "react/jsx-quotes": 0,
+    "react/no-multi-comp": 0
+  }
+}

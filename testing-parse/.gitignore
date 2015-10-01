@@ -1,2 +1,2 @@
-js/gen/
-out/
+build/app.js
+coverage/
